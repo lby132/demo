@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/boardList")
 public class BoardController {
 
-
+private BoardService BoardService;
 
 //    @GetMapping("/getBoard")
 //    public ResponseEntity<String, HttpStatus> getBoardList() {
