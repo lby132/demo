@@ -1,12 +1,15 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.BoardEntity;
+import com.example.demo.domain.Board;
+import com.example.demo.exception.PostNotFound;
+import com.example.demo.request.PostCreate;
+import com.example.demo.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -15,24 +18,33 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public List<BoardEntity> boardList() {
-        return boardRepository.findAll();
+    public List<PostResponse> boardList() {
+        return boardRepository.findAll().stream()
+                .map(PostResponse::new)
+                .collect(Collectors.toList());
     }
 
-    public BoardEntity boardFindOne(Long boardId) {
-        return boardRepository.findById(boardId).orElseThrow(() -> new NullPointerException());
+    public PostResponse boardFindOne(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(PostNotFound::new);
+
+        return PostResponse.builder()
+                .id(boardId)
+                .title(board.getTitle())
+                .content(board.getContent())
+                .auth(board.getAuth())
+                .category(board.getCategory())
+                .build();
     }
 
     int count;
+    public void boardSave(PostCreate postCreate) {
+        Board board = Board.builder()
+                .title(postCreate.getTitle())
+                .content(postCreate.getContent())
+                .category(postCreate.getCategory())
+                .build();
 
-    public void boardSave(BoardEntity board) throws Exception {
-        try {
-            count++;
-            board.setCnt(count);
-            boardRepository.save(board);
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
+        boardRepository.save(board);
     }
 
 }

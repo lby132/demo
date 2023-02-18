@@ -1,17 +1,14 @@
-package com.example.demo.entity;
+package com.example.demo.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "board_t")
-public class BoardEntity {
+public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +30,7 @@ public class BoardEntity {
     private Integer cnt;
 
     @Builder
-    public BoardEntity(Long id, String title, String auth, String category, String content) {
+    public Board(Long id, String title, String auth, String category, String content) {
         this.id = id;
         this.title = title;
         this.auth = auth;
