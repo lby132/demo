@@ -15,6 +15,10 @@ const Main = () => {
         })
     }, []);
 
+    function detail(id: any) {
+        console.log(id)
+    }
+
     return (
         <div className="App">
             {/*<Button as="input" type="button" value="input"/>*/}
@@ -34,7 +38,9 @@ const Main = () => {
                         return (
                             <tr key={res.id}>
                                 <td>{res.id}</td>
-                                <td>{res.title}</td>
+                                <td>
+                                    <a href="#" onClick={() => detail(res.id)}>{res.title}</a>
+                                </td>
                                 <td>{res.auth}</td>
                                 <td>{res.category}</td>
                                 <td>{res.content}</td>
