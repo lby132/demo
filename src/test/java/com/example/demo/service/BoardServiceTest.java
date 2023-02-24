@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.domain.Board;
 import com.example.demo.request.PostCreate;
 import com.example.demo.response.PostResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
+@Slf4j
 @Rollback(value = false)
 class BoardServiceTest {
 
@@ -67,6 +69,28 @@ class BoardServiceTest {
         assertEquals("hi1", response.getContent());
     }
 
+    @Test
+    void 글내용() throws Exception {
+        //given
+        Board board = Board.builder()
+                .title("title1")
+                .auth("student")
+                .content("hi1")
+                .build();
+
+        boardRepository.save(board);
+
+        //when
+        Board findDetail = boardRepository.findById(board.getId()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글 입니다."));
+        String auth = findDetail.getAuth();
+        String title = findDetail.getTitle();
+        String content = findDetail.getContent();
+
+        //then
+        assertEquals("title1", title);
+        assertEquals("student", auth);
+        assertEquals("hi1", content);
+    }
 
 
 }

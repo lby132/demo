@@ -4,6 +4,7 @@ import com.example.demo.domain.Board;
 import com.example.demo.exception.PostNotFound;
 import com.example.demo.request.PostCreate;
 import com.example.demo.response.PostResponse;
+import com.example.demo.response.ResDetailDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,20 @@ public class BoardService {
                 .build();
 
         boardRepository.save(board);
+    }
+
+    public ResDetailDto detail(Long id) {
+        Board detail = boardRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("존재하지 않는 글 입니다."));
+
+        ResDetailDto resDetail = ResDetailDto.builder()
+                .id(detail.getId())
+                .auth(detail.getAuth())
+                .title(detail.getTitle())
+                .content(detail.getContent())
+                .build();
+
+        return resDetail;
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.request.PostCreate;
+import com.example.demo.request.ReqDetailDto;
 import com.example.demo.response.PostResponse;
+import com.example.demo.response.ResDetailDto;
 import com.example.demo.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +21,12 @@ public class BoardController {
 
     @GetMapping("/getBoardList")
     public List<PostResponse> getBoardList() {
-        log.info("aaa");
         return boardService.boardList();
+    }
+
+    @GetMapping("/getBoardContent")
+    public ResDetailDto getDetail(Long id) {
+        return boardService.detail(id);
     }
 
     @PostMapping("/boardSave")
