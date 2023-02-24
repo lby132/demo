@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/board")
@@ -19,6 +19,7 @@ public class BoardController {
 
     @GetMapping("/getBoardList")
     public List<PostResponse> getBoardList() {
+        log.info("aaa");
         return boardService.boardList();
     }
 
