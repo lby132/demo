@@ -26,7 +26,6 @@ public class BoardService {
 
     public PostResponse boardFindOne(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(PostNotFound::new);
-        Board board1 = boardRepository.findById(boardId).orElseThrow(PostNotFound::new);
 
         return PostResponse.builder()
                 .id(boardId)
