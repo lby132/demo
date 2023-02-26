@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Button} from "react-bootstrap";
-import axios from "../api/axios";
 import {MainApi} from "../api/MainApi";
 import Board from "./model/board.model";
+import {Link, NavLink, Route} from "react-router-dom";
+import BoardDetail from "./detail/BoardDetail";
 
 const Main = () => {
     const [data, setData] = useState<Board[]>([]);
@@ -15,13 +15,8 @@ const Main = () => {
         })
     }, []);
 
-    function detail(id: any) {
-        console.log(id)
-    }
-
     return (
         <div className="App">
-            {/*<Button as="input" type="button" value="input"/>*/}
             <table className="table">
                 <thead>
                 <tr>
@@ -39,7 +34,8 @@ const Main = () => {
                             <tr key={res.id}>
                                 <td>{res.id}</td>
                                 <td>
-                                    <a href="#" onClick={() => detail(res.id)}>{res.title}</a>
+                                    {/*<NavLink to={`detail/${res.id}`}>{res.title}</NavLink>*/}
+                                    <NavLink to={`detail/${res.id}`}>{res.title}</NavLink>
                                 </td>
                                 <td>{res.auth}</td>
                                 <td>{res.category}</td>

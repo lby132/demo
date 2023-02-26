@@ -2,7 +2,8 @@ import axios from "axios";
 
 const headers = {
     'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'Accept': '*/*'
+    'Accept': '*/*',
+    'Access-Control-Allow-Origin':'*'
 }
 
 const instance = axios.create({

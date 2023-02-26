@@ -1,5 +1,4 @@
 import React from "react";
-// import "./Footer.css"
 // @ts-ignore
 import styled from "styled-components";
 const Footer = () => {
