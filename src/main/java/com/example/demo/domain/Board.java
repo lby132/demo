@@ -3,6 +3,8 @@ package com.example.demo.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -26,15 +28,19 @@ public class Board {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "reg_dt")
+    private LocalDate regDt;
+
     @Column(name = "cnt")
     private Integer cnt;
 
     @Builder
-    public Board(Long id, String title, String auth, String category, String content) {
-        this.id = id;
+    public Board(String title, String auth, String category, String content, LocalDate regDt, Integer cnt) {
         this.title = title;
         this.auth = auth;
         this.category = category;
         this.content = content;
+        this.regDt = regDt;
+        this.cnt = cnt;
     }
 }

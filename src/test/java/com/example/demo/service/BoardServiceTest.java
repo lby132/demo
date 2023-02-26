@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.domain.Board;
 import com.example.demo.request.PostCreate;
 import com.example.demo.response.PostResponse;
+import com.example.demo.response.ResDetailDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
 
+import java.time.LocalDateTime;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @Transactional
 @Slf4j
-@Rollback(value = false)
+//@Rollback(value = false)
 class BoardServiceTest {
 
     @Autowired
@@ -30,17 +33,20 @@ class BoardServiceTest {
     @Test
     void boardSaveTest() {
         //given
+        LocalDateTime date = LocalDateTime.now();
+
         PostCreate board = PostCreate.builder()
                 .title("title1")
-                .category("study1")
+                .category("자유글")
                 .content("hi1")
+                .regDt(date)
                 .build();
 
         //when
         boardService.boardSave(board);
 
         //then
-        assertEquals(2L, boardRepository.count());
+        assertEquals(5L, boardRepository.count());
         Board post = boardRepository.findAll().get(0);
         assertEquals("title1", post.getTitle());
         assertEquals("hi1", post.getContent());
@@ -52,25 +58,27 @@ class BoardServiceTest {
         //given
         Board board = Board.builder()
                 .title("title1")
-                .category("study1")
+                .auth("student")
+                .category("자유글")
                 .content("hi1")
                 .build();
 
         boardRepository.save(board);
 
         //when
-        PostResponse response = boardService.boardFindOne(board.getId());
+        ResDetailDto response = boardService.detail(board.getId());
 
         //then
         assertThat(response).isNotNull();
         assertEquals(1L, boardRepository.count());
         assertEquals("title1", response.getTitle());
-        assertEquals("study1", response.getCategory());
+        assertEquals("student", response.getAuth());
+        assertEquals("자유글", response.getCategory());
         assertEquals("hi1", response.getContent());
     }
 
     @Test
-    void 글내용() throws Exception {
+    void 글상세() throws Exception {
         //given
         Board board = Board.builder()
                 .title("title1")
@@ -91,6 +99,5 @@ class BoardServiceTest {
         assertEquals("student", auth);
         assertEquals("hi1", content);
     }
-
 
 }

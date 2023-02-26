@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,10 +22,17 @@ public class PostCreate {
     @NotBlank(message = "카테고리를 선택해주세요.")
     private String category;
 
+    private LocalDateTime regDt;
+
+    private Integer cnt;
+
     @Builder
-    public PostCreate(String title, String content, String category) {
+
+    public PostCreate(String title, String content, String category, LocalDateTime regDt, Integer cnt) {
         this.title = title;
         this.content = content;
         this.category = category;
+        this.regDt = regDt;
+        this.cnt = cnt;
     }
 }

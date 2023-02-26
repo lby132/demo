@@ -24,8 +24,8 @@ public class BoardController {
         return boardService.boardList();
     }
 
-    @GetMapping("/getBoardContent")
-    public ResDetailDto getDetail(Long id) {
+    @GetMapping("/getBoardDetail/{id}")
+    public ResDetailDto getDetail(@PathVariable Long id) {
         return boardService.detail(id);
     }
 
@@ -33,4 +33,5 @@ public class BoardController {
     public void boardSave(@RequestBody PostCreate postCreate) {
         boardService.boardSave(postCreate);
     }
+
 }
