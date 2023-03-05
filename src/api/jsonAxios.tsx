@@ -1,15 +1,16 @@
 import axios from "axios";
 
 const headers = {
-    'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'Content-type': 'application/json',
     'Accept': '*/*',
     'Access-Control-Allow-Origin':'*'
 }
 
-const instance = axios.create({
+
+const jsonInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: headers,
 });
 
 
-export default instance;
+export default jsonInstance;

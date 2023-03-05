@@ -1,4 +1,6 @@
+// @ts-ignore
 type DetailType = {
+    id: number;
     title: string;
     content: string;
     auth: string;
@@ -6,4 +8,9 @@ type DetailType = {
     category: string;
 }
 
-export default DetailType;
+type DetailReqType = {
+    id: number;
+    title: string;
+    content: string;
+}
+
