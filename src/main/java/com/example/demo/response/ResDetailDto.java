@@ -14,13 +14,16 @@ public class ResDetailDto {
     private LocalDate regDate;
     private String category;
 
+    private Integer cnt;
+
     @Builder
-    public ResDetailDto(Long id, String title, String content, String auth, LocalDate regDate, String category) {
+    public ResDetailDto(Long id, String title, String content, String auth, LocalDate regDate, String category, Integer cnt) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.auth = auth;
         this.regDate = regDate;
         this.category = category;
+        this.cnt = cnt;
     }
 }

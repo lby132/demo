@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Slf4j
 @RequiredArgsConstructor
@@ -39,4 +40,8 @@ public class BoardController {
         boardService.update(reqDetailDto);
     }
 
+    @PostMapping("/boardDelete/{id}")
+    public void boardDelete(@PathVariable Long id) {
+        boardService.delete(id);
+    }
 }

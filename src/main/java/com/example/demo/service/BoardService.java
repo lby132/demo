@@ -29,7 +29,6 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
-    int count;
     public void boardSave(PostCreate postCreate) {
         LocalDate date = LocalDate.now();
 
@@ -43,6 +42,8 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    int count;
+    @Transactional
     public ResDetailDto detail(Long id) {
         Board detail = boardRepository.findById(id).orElseThrow(PostNotFound::new);
 
@@ -54,8 +55,11 @@ public class BoardService {
                 .regDate(detail.getRegDt())
                 .build();
 
+        detail.setCnt(count++);
+
         return resDetail;
     }
+
 
     @Transactional
     public void update(ReqDetailDto req) {
@@ -63,5 +67,10 @@ public class BoardService {
 
         if (!StringUtils.isEmpty(req.getTitle())) findBoard.setTitle(req.getTitle());
         if (!StringUtils.isEmpty(req.getContent())) findBoard.setContent(req.getContent());
+    }
+
+    public void delete(Long id) {
+        Board findBoard = boardRepository.findById(id).orElseThrow(PostNotFound::new);
+        boardRepository.delete(findBoard);
     }
 }
