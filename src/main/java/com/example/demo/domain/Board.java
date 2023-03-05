@@ -25,6 +25,7 @@ public class Board {
     @Column(name = "category")
     private String category;
 
+    @Lob
     @Column(name = "content")
     private String content;
 

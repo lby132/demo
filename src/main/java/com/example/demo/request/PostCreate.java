@@ -27,7 +27,6 @@ public class PostCreate {
     private Integer cnt;
 
     @Builder
-
     public PostCreate(String title, String content, String category, LocalDateTime regDt, Integer cnt) {
         this.title = title;
         this.content = content;

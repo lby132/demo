@@ -1,11 +1,9 @@
 package com.example.demo.response;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 public class ResDetailDto {
@@ -17,7 +15,8 @@ public class ResDetailDto {
     private String category;
 
     @Builder
-    public ResDetailDto(String title, String content, String auth, LocalDate regDate, String category) {
+    public ResDetailDto(Long id, String title, String content, String auth, LocalDate regDate, String category) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.auth = auth;

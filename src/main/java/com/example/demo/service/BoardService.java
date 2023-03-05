@@ -3,15 +3,16 @@ package com.example.demo.service;
 import com.example.demo.domain.Board;
 import com.example.demo.exception.PostNotFound;
 import com.example.demo.request.PostCreate;
+import com.example.demo.request.ReqDetailDto;
 import com.example.demo.response.PostResponse;
 import com.example.demo.response.ResDetailDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,7 @@ public class BoardService {
         Board detail = boardRepository.findById(id).orElseThrow(PostNotFound::new);
 
         ResDetailDto resDetail = ResDetailDto.builder()
+                .id(detail.getId())
                 .auth(detail.getAuth())
                 .title(detail.getTitle())
                 .content(detail.getContent())
@@ -55,4 +57,11 @@ public class BoardService {
         return resDetail;
     }
 
+    @Transactional
+    public void update(ReqDetailDto req) {
+        Board findBoard = boardRepository.findById(req.getId()).orElseThrow(PostNotFound::new);
+
+        if (!StringUtils.isEmpty(req.getTitle())) findBoard.setTitle(req.getTitle());
+        if (!StringUtils.isEmpty(req.getContent())) findBoard.setContent(req.getContent());
+    }
 }

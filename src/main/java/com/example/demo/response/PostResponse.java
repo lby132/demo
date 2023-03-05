@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 public class PostResponse {
@@ -30,7 +29,6 @@ public class PostResponse {
     }
 
     @Builder
-
     public PostResponse(Long id, String title, String content, String auth, String category, Integer cnt, LocalDate regDt) {
         this.id = id;
         this.title = title;

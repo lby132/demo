@@ -34,4 +34,9 @@ public class BoardController {
         boardService.boardSave(postCreate);
     }
 
+    @PostMapping("/boardUpdate")
+    public void boardUpdate(@RequestBody ReqDetailDto reqDetailDto) {
+        boardService.update(reqDetailDto);
+    }
+
 }
