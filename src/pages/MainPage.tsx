@@ -47,6 +47,7 @@ const Main = () => {
                     })}
                 </tbody>
             </table>
+            <Link className="write btn btn-sm btn-primary" to={`write/`}>글쓰기</Link>
         </div>
     );
 }

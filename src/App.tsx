@@ -5,6 +5,7 @@ import Header from "./components/header/Header";
 import Main from "./pages/MainPage";
 import Footer from "./components/footer/Footer";
 import BoardDetail from "./pages/detail/BoardDetail";
+import BoardWrite from "./pages/write/BoardWrite";
 
 function App() {
     // @ts-ignore
@@ -15,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/detail/:id" element={<BoardDetail />}/>
+                    <Route path="/write" element={<BoardWrite />}/>
                 </Routes>
                 <Footer />
             </BrowserRouter>
