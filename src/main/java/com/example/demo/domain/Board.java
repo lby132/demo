@@ -4,11 +4,11 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Table(name = "board_t")
 public class Board {
 
@@ -32,11 +32,12 @@ public class Board {
     @Column(name = "reg_dt")
     private LocalDate regDt;
 
-    @Column(name = "cnt")
-    private Integer cnt;
+    @Column(name = "cnt", columnDefinition = "integer default 0", nullable = false)
+    private int cnt;
 
     @Builder
-    public Board(String title, String auth, String category, String content, LocalDate regDt, Integer cnt) {
+    public Board(Long id, String title, String auth, String category, String content, LocalDate regDt, Integer cnt) {
+        this.id = id;
         this.title = title;
         this.auth = auth;
         this.category = category;

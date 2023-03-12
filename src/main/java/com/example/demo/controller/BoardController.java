@@ -25,6 +25,7 @@ public class BoardController {
         return boardService.boardList();
     }
 
+    int count;
     @GetMapping("/getBoardDetail/{id}")
     public ResDetailDto getDetail(@PathVariable Long id) {
         return boardService.detail(id);

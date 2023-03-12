@@ -37,12 +37,12 @@ public class BoardService {
                 .content(postCreate.getContent())
                 .category(postCreate.getCategory())
                 .regDt(date)
+                .cnt(postCreate.getCnt())
                 .build();
 
         boardRepository.save(board);
     }
 
-    int count;
     @Transactional
     public ResDetailDto detail(Long id) {
         Board detail = boardRepository.findById(id).orElseThrow(PostNotFound::new);
@@ -55,7 +55,7 @@ public class BoardService {
                 .regDate(detail.getRegDt())
                 .build();
 
-        detail.setCnt(count++);
+        detail.setCnt(detail.getCnt() + 1);
 
         return resDetail;
     }
