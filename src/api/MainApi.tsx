@@ -1,6 +1,5 @@
 import instance from "./axios";
 import jsonInstance from "./jsonAxios";
-export {}
 
 export const MainApi = {
     getBoardList: () => instance.get("/board/getBoardList"),
